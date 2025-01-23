@@ -2,7 +2,6 @@
 #
 # Builds the Obsidian plugins from their source code and moves the output to the plugins folder.
 # This script assumes that you run it from the root of the vault folder.
-# (Meaning the correct command would be ./.scripts/build/build_plugins.sh).
 echo Building plugins
 
 cd .obsidian
