@@ -6,7 +6,10 @@
 # vault-root/.obsidian/plugin-repositories/ -> a folder containing plugin source code in the form of git submodules.
 echo Building plugins
 
-cd .obsidian
+echo Vault: $1
+echo Plugin source: $2
+
+cd $1/.obsidian
 
 echo Current working directory:
 pwd
@@ -19,7 +22,7 @@ excalidraw_folder_name="obsidian-excalidraw-plugin"
 better_markdown_links_folder_name="better-markdown-links"
 filename_heading_sync_folder_name="obsidian-filename-heading-sync"
 
-for d in ./plugin-repositories/*/ ;
+for d in ./$2/*/ ;
     do (
         echo Building plugin $d
 
