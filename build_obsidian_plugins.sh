@@ -87,8 +87,6 @@ for d in ./plugin-repositories/*/ ;
     );
 done
 
-echo Removing work folder
-
 echo Current working directory:
 pwd
 
