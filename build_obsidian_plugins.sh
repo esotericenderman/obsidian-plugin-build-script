@@ -9,7 +9,7 @@ echo Building plugins
 echo Vault: $1
 echo Plugin source: $2
 
-cd $1/.obsidian
+cd $1
 
 echo Current working directory:
 pwd
