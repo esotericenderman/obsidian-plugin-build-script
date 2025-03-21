@@ -21,9 +21,9 @@ filename_heading_sync_folder_name="obsidian-filename-heading-sync"
 
 for d in ./plugin-repositories/*/ ;
     do (
-        cd $d
-
         echo Building plugin $d
+
+        cd $d || exit
 
         echo Current working directory:
         pwd
