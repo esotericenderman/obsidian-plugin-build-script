@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Builds the Obsidian plugins inside a given vault from their source code and moves the built artifacts to their corresponding folder.
+# A script to build the plugins inside a given Obsidian vault from their source code and move the built artifacts to their corresponding folders. .
 # Usage:
 # ./build_obsidian_plugins.sh ./path/to/vault/folder ./path/from/plugin/to/source
 # Argument 1: the path to the root of the vault. (the folder that contains the .obsidian folder)
