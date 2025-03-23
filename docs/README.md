@@ -17,6 +17,8 @@ This script should support *most* plugins, however if a plugin uses a custom bui
 
 ## Usage
 
+See [Esoteric Thought / Primitive Notions][example] for an example usage of this script.
+
 Run the script with the following command:
 
 ```sh
@@ -52,6 +54,8 @@ Run the script with the following command:
 [yarn]: https://github.com/yarnpkg/berry
 [dev-utils]: https://github.com/mnaoumov/obsidian-dev-utils
 [excalidraw]: https://github.com/zsviczian/obsidian-excalidraw-plugin
+
+[example]: https://gitlab.com/esotericthought/primitive-notions
 
 <!-- Files -->
 
