@@ -47,10 +47,14 @@ build_plugin() {
     case "${build_strategies[$name]}" in
         "excalidraw")
             echo "Using Excalidraw build strategy"
+
             pushd "./MathjaxToSVG" > /dev/null
+
             npm install
             npm run build
+
             popd > /dev/null
+
             npm run build
             ;;
         "obsidian-dev-utils")
