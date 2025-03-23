@@ -107,7 +107,7 @@ for plugin in ./.obsidian/plugins/*/; do
 done
 
 echo "Removing possible created lock files"
-git submodule foreach --recursive git restore .
+git submodule foreach --recursive git restore ./
 
 popd > /dev/null
 
