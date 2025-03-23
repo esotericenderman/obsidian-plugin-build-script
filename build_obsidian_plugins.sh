@@ -106,8 +106,13 @@ for plugin in ./.obsidian/plugins/*/; do
     build_plugin "$plugin" || echo "Failed to build $plugin"
 done
 
-echo "Removing possible created lock files"
-git submodule foreach --recursive git restore ./
+echo "Checking for Git repository and submodules"
+if command -v git &> /dev/null && git rev-parse --is-inside-work-tree &> /dev/null; then
+    if git submodule status &> /dev/null; then
+        echo "Removing possible created lock files"
+        git submodule foreach --recursive git restore ./
+    fi
+fi
 
 popd > /dev/null
 
