@@ -3,8 +3,8 @@
 
 set -e
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")"/..
 
-../build_obsidian_plugins.sh test source
+./build_obsidian_plugins.sh test source
 
 cd -
