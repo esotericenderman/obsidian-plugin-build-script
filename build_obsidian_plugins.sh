@@ -86,6 +86,7 @@ move_built_files() {
         "excalidraw")
             mv "$plugin_source/dist/main.js" ./
             mv "$plugin_source/dist/manifest.json" ./
+
             [[ -f "$plugin_source/dist/styles.css" ]] && mv "$plugin_source/dist/styles.css" ./
             ;;
         "obsidian-dev-utils")
@@ -95,6 +96,7 @@ move_built_files() {
         *)
             mv "$plugin_source/main.js" ./
             cp "$plugin_source/manifest.json" ./
+
             [[ -f "$plugin_source/styles.css" ]] && cp "$plugin_source/styles.css" ./
             ;;
     esac
