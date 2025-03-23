@@ -1,12 +1,13 @@
 #!/bin/bash
-#
-# A script to build the plugins inside a given Obsidian vault from their source code and move the built artifacts to their corresponding folders. .
-# Usage:
-# ./build_obsidian_plugins.sh ./path/to/vault/folder ./path/from/plugin/to/source
-# Argument 1: the path to the root of the vault. (the folder that contains the .obsidian folder)
-# Argument 2: the path from the plugin folder (.obsidian/plugins/plugin) to its source code.
 
-set -e  # Exit immediately on error
+# A script to build the plugins inside a given Obsidian vault from their source code and move the built artifacts to their corresponding folders.
+
+# Usage:
+# build_obsidian_plugins.sh vault source
+# vault: the path to the root of the vault. (the folder that contains the .obsidian folder)
+# source: the path from a plugin folder (.obsidian/plugins/plugin) to its source code.
+
+set -e
 
 vault_path="$1"
 plugin_source="$2"
@@ -15,7 +16,6 @@ echo "Building plugins"
 echo "Vault: $vault_path"
 echo "Plugin source: $plugin_source"
 
-# Ensure the vault directory exists
 if [[ ! -d "$vault_path" ]]; then
     echo "Error: Vault directory '$vault_path' not found!"
     exit 1
@@ -71,11 +71,11 @@ build_plugin() {
             ;;
     esac
 
-    popd > /dev/null  # Return to plugin directory
+    popd > /dev/null
 
     move_built_files "$plugin_name"
 
-    popd > /dev/null  # Return to vault directory
+    popd > /dev/null
 }
 
 move_built_files() {
@@ -107,6 +107,6 @@ done
 echo "Removing possible created lock files"
 git submodule foreach --recursive git restore .
 
-popd > /dev/null  # Return to original directory
+popd > /dev/null
 
 echo "Build process complete!"
