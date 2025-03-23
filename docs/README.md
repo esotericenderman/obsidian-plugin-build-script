@@ -9,7 +9,7 @@ A script to build the plugins inside a given Obsidian vault from their source co
 This script should support *most* plugins, however if a plugin uses a custom build strategy or there is an intermediate build step, it may not yet be supported.
 
 | Plugin build strategy             | Supported |
-|-----------------------------------|-----------|
+|-----------------------------------|:---------:|
 | [esbuild][esbuild] (default)      | ✅         |
 | [Yarn][yarn]                      | ✅         |
 | [Obsidian Dev Utils][dev-utils]   | ✅         |
