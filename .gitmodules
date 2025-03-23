@@ -4,3 +4,6 @@
 [submodule "test/.obsidian/plugins/obsidian-excalidraw-plugin/source"]
 	path = test/.obsidian/plugins/obsidian-excalidraw-plugin/source
 	url = git@github.com:zsviczian/obsidian-excalidraw-plugin.git
+[submodule "test/.obsidian/plugins/obsidian-filename-heading-sync/source"]
+	path = test/.obsidian/plugins/obsidian-filename-heading-sync/source
+	url = git@github.com:dvcrn/obsidian-filename-heading-sync.git
