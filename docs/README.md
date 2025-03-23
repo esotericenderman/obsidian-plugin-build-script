@@ -15,6 +15,12 @@ This script should support *most* plugins, however if a plugin uses a custom bui
 | [Obsidian Dev Utils][dev-utils]   | ✅         |
 | [Excalidraw][excalidraw] (custom) | ✅         |
 
+## License
+
+&copy; 2025 [Esoteric Enderman][author-website]
+
+[Obsidian Plugin Build Script][root] is licensed under the [AGPL 3.0][license] only.
+
 ## Topics
 
 <sup>bash script scripting scripts bash-script obsidian bash-scripting bash-scripts obsidian-plugin obsidian-md obsidian-vault obsidian-plugins obsidianmd obsidian-notes obsidian-script obsidian-plugin-development</sup>
@@ -22,6 +28,8 @@ This script should support *most* plugins, however if a plugin uses a custom bui
 <!-- Link aliases -->
 
 [root]: /
+
+[author-website]: https://enderman.dev
 
 [status]: ./assets/images/badges/status.svg
 
@@ -31,3 +39,7 @@ This script should support *most* plugins, however if a plugin uses a custom bui
 [yarn]: https://github.com/yarnpkg/berry
 [dev-utils]: https://github.com/mnaoumov/obsidian-dev-utils
 [excalidraw]: https://github.com/zsviczian/obsidian-excalidraw-plugin
+
+<!-- Files -->
+
+[license]: ../LICENSE
