@@ -15,6 +15,19 @@ This script should support *most* plugins, however if a plugin uses a custom bui
 | [Obsidian Dev Utils][dev-utils]   | ✅         |
 | [Excalidraw][excalidraw] (custom) | ✅         |
 
+## Usage
+
+Run the script with the following command:
+
+```sh
+./build_obsidian_plugins.sh "vault" "source"
+```
+
+### Parameters
+
+- `vault`: The path to the root of your vault. This is the folder containing the `.obsidian` folder.
+- `source`: The path from a plugin directory (`.obsidian/plugins/plugin`) to its source code.
+
 ## License
 
 &copy; 2025 [Esoteric Enderman][author-website]
