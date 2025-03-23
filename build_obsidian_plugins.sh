@@ -97,8 +97,8 @@ move_built_files() {
     esac
 }
 
-for plugin_dir in ./.obsidian/plugins/*/; do
-    build_plugin "$plugin_dir" || echo "Failed to build $plugin_dir"
+for plugin in ./.obsidian/plugins/*/; do
+    build_plugin "$plugin" || echo "Failed to build $plugin"
 done
 
 echo "Removing possible created lock files"
