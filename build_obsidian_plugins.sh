@@ -9,19 +9,19 @@
 
 set -e
 
-vault_path="$1"
+vault="$1"
 plugin_source="$2"
 
 echo "Building plugins"
-echo "Vault: $vault_path"
+echo "Vault: $vault"
 echo "Plugin source: $plugin_source"
 
-if [[ ! -d "$vault_path" ]]; then
-    echo "Error: Vault directory '$vault_path' not found!"
+if [[ ! -d "$vault" ]]; then
+    echo "Error: Vault directory '$vault' not found!"
     exit 1
 fi
 
-pushd "$vault_path" > /dev/null
+pushd "$vault" > /dev/null
 
 echo "Current working directory: $(pwd)"
 
