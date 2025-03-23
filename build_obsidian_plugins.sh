@@ -73,16 +73,16 @@ build_plugin() {
 
     popd > /dev/null
 
-    move_built_files "$plugin_name"
+    move_built_files "$name"
 
     popd > /dev/null
 }
 
 move_built_files() {
-    local plugin_name="$1"
-    echo "Moving built files for $plugin_name"
+    local name="$1"
+    echo "Moving built files for $name"
 
-    case "${build_strategies[$plugin_name]}" in
+    case "${build_strategies[$name]}" in
         "excalidraw")
             mv "$plugin_source/dist/main.js" ./
             mv "$plugin_source/dist/manifest.json" ./
