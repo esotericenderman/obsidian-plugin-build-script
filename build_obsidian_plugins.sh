@@ -25,9 +25,6 @@ pushd "$vault_path" > /dev/null
 
 echo "Current working directory: $(pwd)"
 
-echo "Updating submodules"
-git submodule update --init --recursive
-
 declare -A build_strategies=(
     ["obsidian-excalidraw-plugin"]="excalidraw"
     ["better-markdown-links"]="obsidian-dev-utils"
