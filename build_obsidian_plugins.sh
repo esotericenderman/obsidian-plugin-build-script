@@ -33,10 +33,9 @@ declare -A build_strategies=(
 
 build_plugin() {
     local plugin="$1"
-    local plugin_name
-    plugin_name=$(basename "$plugin")
+    local name=$(basename "$plugin")
 
-    echo "Building plugin: $plugin_name"
+    echo "Building plugin: $name"
     pushd "$plugin" > /dev/null
 
     echo "Finding plugin source code"
@@ -45,7 +44,7 @@ build_plugin() {
     echo "Installing dependencies"
     npm install
 
-    case "${build_strategies[$plugin_name]}" in
+    case "${build_strategies[$name]}" in
         "excalidraw")
             echo "Using Excalidraw build strategy"
             pushd "./MathjaxToSVG" > /dev/null
