@@ -7,3 +7,6 @@
 [submodule "test/.obsidian/plugins/obsidian-filename-heading-sync/source"]
 	path = test/.obsidian/plugins/obsidian-filename-heading-sync/source
 	url = git@github.com:dvcrn/obsidian-filename-heading-sync.git
+[submodule "test/.obsidian/plugins/better-markdown-links/source"]
+	path = test/.obsidian/plugins/better-markdown-links/source
+	url = git@github.com:mnaoumov/obsidian-better-markdown-links.git
