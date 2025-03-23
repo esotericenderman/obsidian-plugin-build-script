@@ -32,12 +32,12 @@ declare -A build_strategies=(
 )
 
 build_plugin() {
-    local plugin_dir="$1"
+    local plugin="$1"
     local plugin_name
-    plugin_name=$(basename "$plugin_dir")
+    plugin_name=$(basename "$plugin")
 
     echo "Building plugin: $plugin_name"
-    pushd "$plugin_dir" > /dev/null
+    pushd "$plugin" > /dev/null
 
     echo "Finding plugin source code"
     pushd "$plugin_source" > /dev/null
