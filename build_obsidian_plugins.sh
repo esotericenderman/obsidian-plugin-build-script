@@ -66,7 +66,7 @@ build_plugin() {
             npx yarn run build
             ;;
         *)
-            echo "Using normal build strategy"
+            echo "Using default build strategy"
             node esbuild.config.mjs production
             ;;
     esac
