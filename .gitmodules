@@ -1,3 +1,6 @@
 [submodule "test/.obsidian/plugins/folder-notes/source"]
 	path = test/.obsidian/plugins/folder-notes/source
 	url = git@github.com:LostPaul/obsidian-folder-notes.git
+[submodule "test/.obsidian/plugins/obsidian-excalidraw-plugin/source"]
+	path = test/.obsidian/plugins/obsidian-excalidraw-plugin/source
+	url = git@github.com:zsviczian/obsidian-excalidraw-plugin.git
