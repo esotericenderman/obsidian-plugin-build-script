@@ -4,7 +4,7 @@
 
 # Usage:
 # build_obsidian_plugins.sh vault source
-# vault: the path to the root of the vault. (the folder that contains the .obsidian folder)
+# vault: the path to the root of the vault (the folder that contains the .obsidian folder).
 # source: the path from a plugin folder (.obsidian/plugins/plugin) to its source code.
 
 set -e
