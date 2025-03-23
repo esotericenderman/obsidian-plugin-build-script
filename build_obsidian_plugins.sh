@@ -6,100 +6,107 @@
 # Argument 1: the path to the root of the vault. (the folder that contains the .obsidian folder)
 # Argument 2: the path from the plugin folder (.obsidian/plugins/plugin) to its source code.
 
+set -e  # Exit immediately on error
+
+vault_path="$1"
+plugin_source="$2"
+
 echo "Building plugins"
+echo "Vault: $vault_path"
+echo "Plugin source: $plugin_source"
 
-echo "Vault: $1"
-echo "Plugin source: $2"
+# Ensure the vault directory exists
+if [[ ! -d "$vault_path" ]]; then
+    echo "Error: Vault directory '$vault_path' not found!"
+    exit 1
+fi
 
-cd "$1" || exit 1
+pushd "$vault_path" > /dev/null
 
-echo "Current working directory:"
-pwd
+echo "Current working directory: $(pwd)"
 
 echo "Updating submodules"
-git submodule update --init --recursive || exit 1
+git submodule update --init --recursive
 
-excalidraw_folder_name="obsidian-excalidraw-plugin"
-better_markdown_links_folder_name="better-markdown-links"
-filename_heading_sync_folder_name="obsidian-filename-heading-sync"
+declare -A build_strategies=(
+    ["obsidian-excalidraw-plugin"]="excalidraw"
+    ["better-markdown-links"]="obsidian-dev-utils"
+    ["obsidian-filename-heading-sync"]="yarn"
+)
 
-for d in ./.obsidian/plugins/*/ ; do
-    (
-        echo "Building plugin $d"
-        cd "$d" || exit 2
+build_plugin() {
+    local plugin_dir="$1"
+    local plugin_name
+    plugin_name=$(basename "$plugin_dir")
 
-        echo "Current working directory:"
-        pwd
+    echo "Building plugin: $plugin_name"
+    pushd "$plugin_dir" > /dev/null
 
-        echo "Finding plugin source code"
-        cd "$2" || exit 3
+    echo "Finding plugin source code"
+    pushd "$plugin_source" > /dev/null
 
-        echo "Current working directory:"
-        pwd
+    echo "Installing dependencies"
+    npm install
 
-        echo "Installing dependencies"
-        npm i || exit 4
-
-        if [[ "$d" == *"$excalidraw_folder_name"* ]]; then
+    case "${build_strategies[$plugin_name]}" in
+        "excalidraw")
             echo "Using Excalidraw build strategy"
-            (
-                cd ./MathjaxToSVG || exit 4
-                npm i || exit 4
-                npm run build || exit 5
-            )
-            npm run build || exit 5
-        elif [[ "$d" == *"$better_markdown_links_folder_name"* ]]; then
+            pushd "./MathjaxToSVG" > /dev/null
+            npm install
+            npm run build
+            popd > /dev/null
+            npm run build
+            ;;
+        "obsidian-dev-utils")
             echo "Using Obsidian Dev Utils build strategy"
-            npx obsidian-dev-utils build || exit 5
-        elif [[ "$d" == *"$filename_heading_sync_folder_name"* ]]; then
+            npx obsidian-dev-utils build
+            ;;
+        "yarn")
             echo "Using yarn build strategy"
-            npx yarn run build || exit 5
-        else
+            npx yarn run build
+            ;;
+        *)
             echo "Using normal build strategy"
-            node esbuild.config.mjs production || exit 5
-        fi
+            node esbuild.config.mjs production
+            ;;
+    esac
 
-        echo "Making sure directories exist"
-        echo "Current working directory:"
-        pwd
+    popd > /dev/null  # Return to plugin directory
 
-        cd -
+    move_built_files "$plugin_name"
 
-        if [[ "$d" == *"$excalidraw_folder_name"* ]]; then
-            echo "Using dist folder movement strategy"
+    popd > /dev/null  # Return to vault directory
+}
 
-            mv "$2/dist/main.js" ./ || exit 7
-            mv "$2/dist/manifest.json" ./ || exit 7
+move_built_files() {
+    local plugin_name="$1"
+    echo "Moving built files for $plugin_name"
 
-            if [[ -f "$2/dist/styles.css" ]]; then
-                mv "$2/dist/styles.css" ./ || exit 7
-            fi
-        elif [[ "$d" == *"$better_markdown_links_folder_name"* ]]; then
-            echo "Using dist/build folder movement strategy"
+    case "${build_strategies[$plugin_name]}" in
+        "excalidraw")
+            mv "$plugin_source/dist/main.js" ./
+            mv "$plugin_source/dist/manifest.json" ./
+            [[ -f "$plugin_source/dist/styles.css" ]] && mv "$plugin_source/dist/styles.css" ./
+            ;;
+        "obsidian-dev-utils")
+            mv "$plugin_source/dist/build/main.js" ./
+            mv "$plugin_source/dist/build/manifest.json" ./
+            ;;
+        *)
+            mv "$plugin_source/main.js" ./
+            cp "$plugin_source/manifest.json" ./
+            [[ -f "$plugin_source/styles.css" ]] && cp "$plugin_source/styles.css" ./
+            ;;
+    esac
+}
 
-            mv "$2/dist/build/main.js" ./ || exit 7
-            mv "$2/dist/build/manifest.json" ./ || exit 7
-        else
-            echo "Using standard movement strategy"
-
-            mv "$2/main.js" ./ || exit 7
-            cp "$2/manifest.json" ./ || exit 7
-
-            if [[ -f "$2/styles.css" ]]; then
-                cp "$2/styles.css" ./ || exit 7
-            fi
-        fi
-    )
-    
-    exit_code=$?
-    if [[ $exit_code -ne 0 ]]; then
-        echo "Error occurred while building $d. Exiting with code $exit_code."
-        exit "$exit_code"
-    fi
+for plugin_dir in ./.obsidian/plugins/*/; do
+    build_plugin "$plugin_dir" || echo "Failed to build $plugin_dir"
 done
 
-echo "Current working directory:"
-pwd
-
 echo "Removing possible created lock files"
-git submodule foreach git restore ./ || exit 8
+git submodule foreach --recursive git restore .
+
+popd > /dev/null  # Return to original directory
+
+echo "Build process complete!"
