@@ -26,9 +26,9 @@ pushd "$vault" > /dev/null
 echo "Current working directory: $(pwd)"
 
 declare -A build_strategies=(
-    ["obsidian-excalidraw-plugin"]="excalidraw"
-    ["better-markdown-links"]="obsidian-dev-utils"
     ["obsidian-filename-heading-sync"]="yarn"
+    ["better-markdown-links"]="obsidian-dev-utils"
+    ["obsidian-excalidraw-plugin"]="excalidraw"
 )
 
 build_plugin() {
