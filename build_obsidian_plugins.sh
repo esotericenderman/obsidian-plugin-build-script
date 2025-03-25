@@ -63,7 +63,7 @@ build_plugin() {
         "excalidraw")
             echo "Using Excalidraw build strategy"
 
-            pushd "./MathjaxToSVG" > /dev/null || { echo "Error: failed to access Excalidraw sub-directory!";exit 7 }
+            pushd "./MathjaxToSVG" > /dev/null || { echo "Error: failed to access Excalidraw sub-directory!"; exit 7 }
 
             npm install || { echo "Error: failed to install Excalidraw sub-directory dependencies!"; exit 6 }
             npm run build || { echo "Error: failed to install Excalidraw sub-project!"; exit 7 }
