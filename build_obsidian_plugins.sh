@@ -12,17 +12,17 @@ set -e
 vault="$1"
 plugin_source="$2"
 
-if [[ ! -f "$vault" ]]; then
+if ! test -d "$vault" ; then
     echo "Error: vault directory not found!"
     exit 1
 fi
 
-if [[ ! -f "$vault/.obsidian" ]]; then
+if ! test -d "$vault/.obsidian" ; then
     echo "Error: provided directory is not an Obsidian vault as it does not contain a .obsidian folder!"
     exit 2
 fi
 
-if [[ ! -f "$vault/.obsidian/plugins" ]]; then
+if ! test -d "$vault/.obsidian/plugins" ; then
     echo "Error: no plugins folder found in .obsidian directory!"
     exit 3
 fi
