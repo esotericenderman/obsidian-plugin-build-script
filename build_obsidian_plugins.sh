@@ -48,7 +48,9 @@ declare -A build_strategies=(
 
 build_plugin() {
     local plugin="$1"
-    local name=$(basename "$plugin")
+
+    local name
+    name=$(basename "$plugin")
 
     echo "Building plugin: $name"
     pushd "$plugin" > /dev/null || {
