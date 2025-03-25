@@ -158,7 +158,7 @@ move_built_files() {
 }
 
 for plugin in ./.obsidian/plugins/*/; do
-    build_plugin "$plugin" || echo "Failed to build $plugin"
+    build_plugin "$plugin"
 done
 
 echo "Checking for Git repository and submodules"
