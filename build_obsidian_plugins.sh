@@ -13,23 +13,19 @@ vault="$1"
 plugin_source="$2"
 
 if ! test -d "$vault" ; then
-    echo "Error: vault directory not found!"
-    exit 1
+    echo "Error: vault directory not found!"; exit 1
 fi
 
 if ! test -d "$vault/.obsidian" ; then
-    echo "Error: provided directory is not an Obsidian vault as it does not contain a .obsidian folder!"
-    exit 2
+    echo "Error: provided directory is not an Obsidian vault as it does not contain a .obsidian folder!"; exit 2
 fi
 
 if ! test -d "$vault/.obsidian/plugins" ; then
-    echo "Error: no plugins folder found in .obsidian directory!"
-    exit 3
+    echo "Error: no plugins folder found in .obsidian directory!"; exit 3
 fi
 
 if [ -z "$( ls -A "$vault/.obsidian/plugins" )" ]; then
-   echo "No plugins found in plugins folder. Nothing to do."
-   exit 0
+   echo "No plugins found in plugins folder. Nothing to do."; exit 0
 fi
 
 echo "Building plugins"
@@ -53,19 +49,22 @@ build_plugin() {
     name=$(basename "$plugin")
 
     echo "Building plugin: $name"
+
     pushd "$plugin" > /dev/null || {
-      echo "Error: failed to enter directory $plugin!" ; exit 4
+      echo "Error: failed to enter directory $plugin!"; exit 4
     }
 
     echo "Finding plugin source code"
+
     pushd "$plugin_source" > /dev/null || {
       echo "Error: source code of plugin $plugin not found!"; exit 5
-      }
+    }
 
     echo "Installing dependencies"
+
     npm install || {
       echo "Error: failed to install dependencies of plugin $plugin!"; exit 6
-      }
+    }
 
     case "${build_strategies[$name]}" in
         "excalidraw")
@@ -91,18 +90,21 @@ build_plugin() {
             ;;
         "obsidian-dev-utils")
             echo "Using Obsidian Dev Utils build strategy"
+
             npx obsidian-dev-utils build || {
               echo "Error: failed to build plugin $plugin using Obsidian Dev Utils!"; exit 7
             }
             ;;
         "yarn")
             echo "Using yarn build strategy"
+
             npx yarn run build || {
               echo "Error: failed to build plugin $plugin using Yarn!"; exit 7
-              }
+            }
             ;;
         *)
             echo "Using default build strategy"
+
             node esbuild.config.mjs production || {
               echo "Error: failed to build plugin $plugin using esbuild!"; exit 7
             }
@@ -125,6 +127,7 @@ move_built_files() {
             mv "$plugin_source/dist/main.js" ./ || {
               echo "Error: failed to move Excalidraw main file!"; exit 8
             }
+
             mv "$plugin_source/dist/manifest.json" ./ || {
               echo "Error: failed to move Excalidraw manifest file!"; exit 8
             }
@@ -135,6 +138,7 @@ move_built_files() {
             mv "$plugin_source/dist/build/main.js" ./ || {
               echo "Error: failed to move main file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
             }
+
             mv "$plugin_source/dist/build/manifest.json" ./ || {
               echo "Error: failed to move manifest file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
             }
@@ -143,6 +147,7 @@ move_built_files() {
             mv "$plugin_source/main.js" ./ || {
               echo "Error: failed to move main file of plugin $plugin!"; exit 8
             }
+
             cp "$plugin_source/manifest.json" ./ || {
               echo "Error: failed to move manifest file of plugin $plugin!"; exit 8
             }
@@ -160,6 +165,7 @@ echo "Checking for Git repository and submodules"
 if command -v git &> /dev/null && git rev-parse --is-inside-work-tree &> /dev/null; then
     if git submodule status &> /dev/null; then
         echo "Removing possible created lock files"
+
         git submodule foreach --recursive git restore ./ || {
           echo "Failed to restore submodules to their original state!"; exit 9
         }
