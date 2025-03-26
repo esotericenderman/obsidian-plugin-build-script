@@ -4,6 +4,10 @@
 
 A script to build the plugins inside a given Obsidian vault from their source code and move the built artifacts to their corresponding folders.
 
+## Information
+
+- [Credit][credit]
+
 ## Supported Plugin Types
 
 This script should support *most* plugins, however if a plugin uses a custom build strategy or there is an intermediate build step, it may not yet be supported.
@@ -60,3 +64,4 @@ Run the script with the following command:
 <!-- Files -->
 
 [license]: ../LICENSE
+[credit]: ./CREDIT.md
