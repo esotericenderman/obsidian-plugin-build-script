@@ -10,7 +10,7 @@
 #### [Obsidian Sample Plugin][sample-plugin]
 
 <sup>[&copy; 2020-2025][sample-plugin-copyright-notice] [Dynalist Incorporated][sample-plugin-author]</sup>\
-<sup>By [Obsidian][sample-plugin-creator] and [Obsidian Sample Plugin contributors][sample-plugin-contributors]</sup>\
+<sup>By the [Obsidian Team][sample-plugin-creator] and [Obsidian Sample Plugin contributors][sample-plugin-contributors]</sup>\
 <sup>[Licensed][sample-plugin-license-notice] under the [0BSD License][sample-plugin-license]</sup>
 
 #### [Obsidian Better Markdown Links][better-markdown-links]
@@ -45,7 +45,7 @@
 [sample-plugin-author]: https://dynalist.io/
 [sample-plugin-license-notice]: https://github.com/obsidianmd/obsidian-sample-plugin/tree/6d09ce3e39c4e48d756d83e7b51583676939a5a7?tab=License-1-ov-file
 [sample-plugin-license]: https://github.com/obsidianmd/obsidian-sample-plugin/blob/6d09ce3e39c4e48d756d83e7b51583676939a5a7/LICENSE
-[sample-plugin-creator]: https://obsidian.md/
+[sample-plugin-creator]: https://obsidian.md/about
 [sample-plugin-contributors]: https://github.com/obsidianmd/obsidian-sample-plugin/graphs/contributors
 
 [folder-notes]: https://github.com/LostPaul/obsidian-folder-notes/tree/1.7.35
