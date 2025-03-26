@@ -26,7 +26,7 @@
 #### [Obsidian Folder Notes][folder-notes]
 
 <sup>By [Lost Paul][folder-notes-author] and [Obsidian Folder Notes contributors][folder-notes-contributors]</sup>\
-<sup>[Licensed][folder-notes-license-notice] under the [AGPL 3.0][folder-notes-license-notice]</sup>
+<sup>[Licensed][folder-notes-license-notice] under the [AGPL 3.0][folder-notes-license]</sup>
 
 #### [Excalidraw][excalidraw]
 
