@@ -7,33 +7,6 @@
 # vault: the path to the root of the vault (the folder that contains the .obsidian folder).
 # source: the path from a plugin folder (.obsidian/plugins/plugin) to its source code.
 
-vault="$1"
-plugin_source="$2"
-
-if ! test -d "$vault" ; then
-    echo "Error: vault directory not found!"; exit 1
-fi
-
-if ! test -d "$vault/.obsidian" ; then
-    echo "Error: provided directory is not an Obsidian vault as it does not contain a .obsidian folder!"; exit 2
-fi
-
-if ! test -d "$vault/.obsidian/plugins" ; then
-    echo "Error: no plugins folder found in .obsidian directory!"; exit 3
-fi
-
-if [ -z "$( ls -A "$vault/.obsidian/plugins" )" ]; then
-   echo "No plugins found in plugins folder. Nothing to do."; exit 0
-fi
-
-echo "Building plugins"
-echo "Vault: $vault"
-echo "Plugin source: $plugin_source"
-
-pushd "$vault" > /dev/null
-
-echo "Current working directory: $(pwd)"
-
 declare -A build_strategies=(
     ["obsidian-filename-heading-sync"]="yarn"
     ["better-markdown-links"]="obsidian-dev-utils"
@@ -155,21 +128,54 @@ move_built_files() {
     esac
 }
 
-for plugin in ./.obsidian/plugins/*/; do
-    build_plugin "$plugin"
-done
+main() {
+    vault="$1"
+    plugin_source="$2"
 
-echo "Checking for Git repository and submodules"
-if command -v git &> /dev/null && git rev-parse --is-inside-work-tree &> /dev/null; then
-    if git submodule status &> /dev/null; then
-        echo "Removing possible created lock files"
-
-        git submodule foreach --recursive git restore ./ || {
-          echo "Failed to restore submodules to their original state!"; exit 9
-        }
+    if ! test -d "$vault" ; then
+        echo "Error: vault directory not found!"; exit 1
     fi
+
+    if ! test -d "$vault/.obsidian" ; then
+        echo "Error: provided directory is not an Obsidian vault as it does not contain a .obsidian folder!"; exit 2
+    fi
+
+    if ! test -d "$vault/.obsidian/plugins" ; then
+        echo "Error: no plugins folder found in .obsidian directory!"; exit 3
+    fi
+
+    if [ -z "$( ls -A "$vault/.obsidian/plugins" )" ]; then
+      echo "No plugins found in plugins folder. Nothing to do."; exit 0
+    fi
+
+    echo "Building plugins"
+    echo "Vault: $vault"
+    echo "Plugin source: $plugin_source"
+
+    pushd "$vault" > /dev/null
+
+    echo "Current working directory: $(pwd)"
+
+    for plugin in ./.obsidian/plugins/*/; do
+        build_plugin "$plugin"
+    done
+
+    echo "Checking for Git repository and submodules"
+    if command -v git &> /dev/null && git rev-parse --is-inside-work-tree &> /dev/null; then
+        if git submodule status &> /dev/null; then
+            echo "Removing possible created lock files"
+
+            git submodule foreach --recursive git restore ./ || {
+              echo "Failed to restore submodules to their original state!"; exit 9
+            }
+        fi
+    fi
+
+    popd > /dev/null
+
+    echo "Build process complete!"
+}
+
+if [ "${1}" != "--source-only" ]; then
+    main "${@}"
 fi
-
-popd > /dev/null
-
-echo "Build process complete!"
