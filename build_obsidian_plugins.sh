@@ -7,7 +7,7 @@
 # vault: the path to the root of the vault (the folder that contains the .obsidian folder).
 # source: the path from a plugin folder (.obsidian/plugins/plugin) to its source code.
 
-declare -A build_strategies=(
+declare -A obsidian_plugin_build_strategies=(
     ["obsidian-filename-heading-sync"]="yarn"
     ["better-markdown-links"]="obsidian-dev-utils"
     ["obsidian-excalidraw-plugin"]="excalidraw"
@@ -37,7 +37,7 @@ build_obsidian_plugin() {
       echo "Error: failed to install dependencies of plugin $plugin!"; exit 6
     }
 
-    case "${build_strategies[$name]}" in
+    case "${obsidian_plugin_build_strategies[$name]}" in
         "excalidraw")
             echo "Using Excalidraw build strategy"
 
@@ -93,7 +93,7 @@ install_obsidian_plugin() {
     local name="$1"
     echo "Moving built files for $name"
 
-    case "${build_strategies[$name]}" in
+    case "${obsidian_plugin_build_strategies[$name]}" in
         "excalidraw")
             mv "$plugin_source/dist/main.js" ./ || {
               echo "Error: failed to move Excalidraw main file!"; exit 8
