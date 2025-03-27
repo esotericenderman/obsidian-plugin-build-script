@@ -2,15 +2,15 @@
 
 ## [Obsidian][obsidian]
 
-<sup>By the [Obsidian Team][obsidian-team]</sup>\
-<sup>[Licensed][obsidian-license-notice] under the [Obsidian License][obsidian-license]</sup>
+<sup>By the [Obsidian team][obsidian-team]</sup>\
+<sup>[Licensed][obsidian-license-notice] under the [Obsidian license][obsidian-license]</sup>
 
 ### Plugins
 
 #### [Obsidian Sample Plugin][sample-plugin]
 
 <sup>[&copy; 2020-2025][sample-plugin-copyright-notice] [Dynalist Incorporated][sample-plugin-author]</sup>\
-<sup>By the [Obsidian Team][sample-plugin-creator] and [Obsidian Sample Plugin contributors][sample-plugin-contributors]</sup>\
+<sup>By the [Obsidian team][sample-plugin-creator] and [Obsidian Sample Plugin contributors][sample-plugin-contributors]</sup>\
 <sup>[Licensed][sample-plugin-license-notice] under [0BSD][sample-plugin-license]</sup>
 
 #### [Obsidian Better Markdown Links][better-markdown-links]
