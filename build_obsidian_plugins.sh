@@ -129,8 +129,8 @@ install_obsidian_plugin() {
 }
 
 build_obsidian_plugins() {
-    vault="$1"
-    plugin_source="$2"
+    local vault="$1"
+    local plugin_source="$2"
 
     if ! test -d "$vault" ; then
         echo "Error: vault directory not found!"; exit 1
