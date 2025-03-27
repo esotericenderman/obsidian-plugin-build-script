@@ -12,12 +12,12 @@ A script to build the plugins inside a given Obsidian vault from their source co
 
 This script should support *most* plugins, however if a plugin uses a custom build strategy or there is an intermediate build step, it may not yet be supported.
 
-| Plugin build strategy             | Supported |
-|-----------------------------------|:---------:|
-| [esbuild][esbuild] (default)      | ✅         |
-| [Yarn][yarn]                      | ✅         |
-| [Obsidian Dev Utils][dev-utils]   | ✅         |
-| [Excalidraw][excalidraw] (custom) | ✅         |
+| Plugin build strategy                                         | Supported |
+|---------------------------------------------------------------|:---------:|
+| [esbuild][esbuild] ([default][default-esbuild-configuration]) | ✅        |
+| [Yarn][yarn]                                                  | ✅        |
+| [Obsidian Dev Utils][dev-utils]                               | ✅        |
+| [Excalidraw][excalidraw] (custom)                             | ✅        |
 
 ## Usage
 
@@ -55,6 +55,8 @@ Run the script with the following command:
 <!-- References -->
 
 [esbuild]: https://esbuild.github.io/
+[default-esbuild-configuration]: https://github.com/obsidianmd/obsidian-sample-plugin/blob/6d09ce3e39c4e48d756d83e7b51583676939a5a7/esbuild.config.mjs
+
 [yarn]: https://github.com/yarnpkg/berry
 [dev-utils]: https://github.com/mnaoumov/obsidian-dev-utils
 [excalidraw]: https://github.com/zsviczian/obsidian-excalidraw-plugin
