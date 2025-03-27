@@ -13,7 +13,7 @@ declare -A build_strategies=(
     ["obsidian-excalidraw-plugin"]="excalidraw"
 )
 
-build_plugin() {
+build_obsidian_plugin() {
     local plugin="$1"
 
     local name
@@ -84,12 +84,12 @@ build_plugin() {
 
     popd > /dev/null
 
-    move_built_files "$name"
+    install_obsidian_plugin "$name"
 
     popd > /dev/null
 }
 
-move_built_files() {
+install_obsidian_plugin() {
     local name="$1"
     echo "Moving built files for $name"
 
@@ -128,7 +128,7 @@ move_built_files() {
     esac
 }
 
-main() {
+build_obsidian_plugins() {
     vault="$1"
     plugin_source="$2"
 
@@ -157,7 +157,7 @@ main() {
     echo "Current working directory: $(pwd)"
 
     for plugin in ./.obsidian/plugins/*/; do
-        build_plugin "$plugin"
+        build_obsidian_plugin "$plugin"
     done
 
     echo "Checking for Git repository and submodules"
@@ -177,5 +177,5 @@ main() {
 }
 
 if [ "${1}" != "--source-only" ]; then
-    main "${@}"
+    build_obsidian_plugins "${@}"
 fi
