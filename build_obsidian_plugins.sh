@@ -15,6 +15,7 @@ declare -A obsidian_plugin_build_strategies=(
 
 build_obsidian_plugin() {
     local plugin="$1"
+    local plugin_source="$2"
 
     local name
     name=$(basename "$plugin")
@@ -84,13 +85,14 @@ build_obsidian_plugin() {
 
     popd > /dev/null
 
-    install_obsidian_plugin "$name"
+    install_obsidian_plugin "$name" "$plugin_source"
 
     popd > /dev/null
 }
 
 install_obsidian_plugin() {
     local name="$1"
+    local plugin_source="$2"
     echo "Moving built files for $name"
 
     case "${obsidian_plugin_build_strategies[$name]}" in
@@ -157,7 +159,7 @@ build_obsidian_plugins() {
     echo "Current working directory: $(pwd)"
 
     for plugin in ./.obsidian/plugins/*/; do
-        build_obsidian_plugin "$plugin"
+        build_obsidian_plugin "$plugin" "$plugin_source"
     done
 
     echo "Checking for Git repository and submodules"
