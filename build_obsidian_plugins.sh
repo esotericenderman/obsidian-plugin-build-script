@@ -165,7 +165,7 @@ main() {
         if git submodule status &> /dev/null; then
             echo "Removing possible created lock files"
 
-            git submodule foreach --recursive git restore ./ || {
+            git submodule foreach --recursive "git restore ./ && git clean -f" || {
               echo "Failed to restore submodules to their original state!"; exit 9
             }
         fi
