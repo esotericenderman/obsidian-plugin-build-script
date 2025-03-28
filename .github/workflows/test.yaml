@@ -1,11 +1,11 @@
-name: script
+name: test
 
 on:
   push:
   pull_request:
 
 jobs:
-  plugins:
+  script:
     runs-on: ubuntu-latest
 
     strategy:
