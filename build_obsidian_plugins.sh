@@ -84,48 +84,49 @@ build_obsidian_plugin() {
     esac
 
     popd > /dev/null
-
-    install_obsidian_plugin "$name" "$plugin_source"
-
     popd > /dev/null
 }
 
 install_obsidian_plugin() {
-    local name="$1"
+    local plugin="$1"
     local plugin_source="$2"
+
+    local name
+    name=$(basename "$plugin")
+
     echo "Moving built files for $name"
 
     case "${obsidian_plugin_build_strategies[$name]}" in
         "excalidraw")
-            mv "$plugin_source/dist/main.js" ./ || {
+            mv "$plugin/$plugin_source/dist/main.js" $plugin || {
               echo "Error: failed to move Excalidraw main file!"; exit 8
             }
 
-            mv "$plugin_source/dist/manifest.json" ./ || {
+            mv "$plugin/$plugin_source/dist/manifest.json" $plugin || {
               echo "Error: failed to move Excalidraw manifest file!"; exit 8
             }
 
-            [[ -f "$plugin_source/dist/styles.css" ]] && mv "$plugin_source/dist/styles.css" ./
+            [[ -f "$plugin/$plugin_source/dist/styles.css" ]] && mv "$plugin/$plugin_source/dist/styles.css" $plugin
             ;;
         "obsidian-dev-utils")
-            mv "$plugin_source/dist/build/main.js" ./ || {
+            mv "$plugin/$plugin_source/dist/build/main.js" $plugin || {
               echo "Error: failed to move main file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
             }
 
-            mv "$plugin_source/dist/build/manifest.json" ./ || {
+            mv "$plugin/$plugin_source/dist/build/manifest.json" $plugin || {
               echo "Error: failed to move manifest file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
             }
             ;;
         *)
-            mv "$plugin_source/main.js" ./ || {
+            mv "$plugin/$plugin_source/main.js" $plugin || {
               echo "Error: failed to move main file of plugin $plugin!"; exit 8
             }
 
-            cp "$plugin_source/manifest.json" ./ || {
+            cp "$plugin/$plugin_source/manifest.json" $plugin || {
               echo "Error: failed to move manifest file of plugin $plugin!"; exit 8
             }
 
-            [[ -f "$plugin_source/styles.css" ]] && cp "$plugin_source/styles.css" ./
+            [[ -f "$plugin/$plugin_source/styles.css" ]] && cp "$plugin/$plugin_source/styles.css" $plugin
             ;;
     esac
 }
@@ -160,6 +161,7 @@ build_obsidian_plugins() {
 
     for plugin in ./.obsidian/plugins/*/; do
         build_obsidian_plugin "$plugin" "$plugin_source"
+        install_obsidian_plugin "$plugin" "$plugin_source"
     done
 
     echo "Checking for Git repository and submodules"
