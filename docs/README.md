@@ -8,6 +8,10 @@ A script to build the plugins inside a given Obsidian vault from their source co
 
 - [Credit][credit]
 
+## Requirements
+
+- [jq][jq]
+
 ## Supported Plugin Types
 
 This script should support *most* plugins, however if a plugin uses a custom build strategy or there is an intermediate build step, it may not yet be supported.
@@ -62,6 +66,10 @@ Run the script with the following command:
 [excalidraw]: https://github.com/zsviczian/obsidian-excalidraw-plugin
 
 [example]: https://gitlab.com/esotericthought/primitive-notions
+
+<!-- Dependencies -->
+
+[jq]: https://jqlang.org/
 
 <!-- Files -->
 
