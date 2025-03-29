@@ -39,7 +39,7 @@ install_obsidian_plugin() {
           echo "Error: failed to read Obsidian plugin ID from manifest.json file while install plugin at path $plugin_source into Obsidian vault at path $vault!"; exit 6
       fi
 
-      build_obsidian_plugin $plugin_source
+      build_obsidian_plugin "$plugin_source"
 
       echo "Installing Obsidian plugin with ID $plugin_id..."
 
@@ -47,46 +47,46 @@ install_obsidian_plugin() {
 
       case "${obsidian_plugin_build_strategies[$plugin_id]}" in
           "excalidraw")
-              mv "$plugin_source/dist/main.js" $plugin_directory || {
+              mv "$plugin_source/dist/main.js" "$plugin_directory" || {
                 echo "Error: failed to move Excalidraw main file!"; exit 7
               }
 
-              mv "$plugin_source/dist/manifest.json" $plugin_directory || {
+              mv "$plugin_source/dist/manifest.json" "$plugin_directory" || {
                 echo "Error: failed to move Excalidraw manifest file!"; exit 7
               }
 
               [[ -f "$plugin_source/dist/styles.css" ]] && {
-                mv "$plugin_source/dist/styles.css" $plugin_directory || {
+                mv "$plugin_source/dist/styles.css" "$plugin_directory" || {
                   echo "Error: failed to move Excalidraw styles file!"; exit 7
                 }
               }
               ;;
           "obsidian-dev-utils")
-              mv "$plugin_source/dist/build/main.js" $plugin_directory || {
+              mv "$plugin_source/dist/build/main.js" "$plugin_directory" || {
                 echo "Error: failed to move main file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
               }
 
-              mv "$plugin_source/dist/build/manifest.json" $plugin_directory || {
+              mv "$plugin_source/dist/build/manifest.json" "$plugin_directory" || {
                 echo "Error: failed to move manifest file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
               }
 
               [[ -f "$plugin_source/dist/build/styles.css" ]] && {
-                mv $plugin_source/dist/build/styles.css $plugin_directory || {
+                mv "$plugin_source/dist/build/styles.css" "$plugin_directory" || {
                   echo "Error: failed to move styles file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
                 }
               }
               ;;
           *)
-              mv "$plugin_source/main.js" $plugin_directory || {
+              mv "$plugin_source/main.js" "$plugin_directory" || {
                 echo "Error: failed to move main file of plugin $plugin!"; exit 8
               }
 
-              cp "$plugin_source/manifest.json" $plugin_directory || {
+              cp "$plugin_source/manifest.json" "$plugin_directory" || {
                 echo "Error: failed to move manifest file of plugin $plugin!"; exit 8
               }
 
               [[ -f "$plugin_source/styles.css" ]] && {
-                cp "$plugin_source/styles.css" $plugin_directory || {
+                cp "$plugin_source/styles.css" "$plugin_directory" || {
                   echo "Error: failed to move styles file of plugin $plugin!"; exit 8
                 }
               }
@@ -95,6 +95,6 @@ install_obsidian_plugin() {
     done
 }
 
-if [ $1 != --source-only ]; then
-    install_obsidian_plugin $@
+if [ "$1" != --source-only ]; then
+    install_obsidian_plugin "$@"
 fi
