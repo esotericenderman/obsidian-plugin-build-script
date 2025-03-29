@@ -1,6 +1,6 @@
 pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
 
-. ./obsidian_plugin_build_strategies.sh
+. ./build_obsidian_plugin.sh --source-only
 
 popd > /dev/null
 
@@ -35,6 +35,8 @@ install_obsidian_plugin() {
     if [[ -z $plugin_id ]]; then
         echo "Error: failed to read Obsidian plugin ID from manifest.json file while install plugin at path $plugin_source into Obsidian vault at path $vault!"; exit 6
     fi
+
+    build_obsidian_plugin $plugin_source
 
     echo "Installing Obsidian plugin with ID $plugin_id..."
 
