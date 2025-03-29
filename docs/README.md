@@ -21,10 +21,10 @@ This script should support *most* plugins, however if a plugin uses a custom bui
 
 | Plugin build strategy                                         | Supported |
 |---------------------------------------------------------------|:---------:|
-| [esbuild][esbuild] ([default][default-esbuild-configuration]) | ✅        |
-| [Yarn][yarn]                                                  | ✅        |
-| [Obsidian Dev Utils][dev-utils]                               | ✅        |
-| [Excalidraw][excalidraw] (custom)                             | ✅        |
+| [esbuild][esbuild] ([default][default-esbuild-configuration]) |     ✅     |
+| [Yarn][yarn]                                                  |     ✅     |
+| [Obsidian Dev Utils][dev-utils]                               |     ✅     |
+| [Excalidraw][excalidraw] (custom)                             |     ✅     |
 
 ## Usage
 
