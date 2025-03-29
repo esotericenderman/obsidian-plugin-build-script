@@ -42,6 +42,7 @@ install_obsidian_plugins() {
     for plugin in ./$vault/.obsidian/plugins/*/; do
         echo "Running install script for Obsidian vault at path $vault..."
         echo "Running install script for Obsidian plugin $plugin..."
+        echo "Relative source directory: $plugin_source"
 
         source_directory="$plugin/$plugin_source"
 
