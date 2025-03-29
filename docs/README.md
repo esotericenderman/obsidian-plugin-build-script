@@ -49,7 +49,7 @@ Run the script with the following command:
 
 ## Topics
 
-<sup>bash script scripting scripts bash-script obsidian bash-scripting bash-scripts obsidian-plugin obsidian-md obsidian-vault obsidian-plugins obsidianmd obsidian-notes obsidian-script obsidian-plugin-development</sup>
+<sup>[bash](https://github.com/topics/bash), [script](https://github.com/topics/script), [scripting](https://github.com/topics/scripting), [scripts](https://github.com/topics/scripts), [bash-script](https://github.com/topics/bash-script), [obsidian](https://github.com/topics/obsidian), [bash-scripting](https://github.com/topics/bash-scripting), [bash-scripts](https://github.com/topics/bash-scripts), [obsidian-plugin](https://github.com/topics/obsidian-plugin), [obsidian-md](https://github.com/topics/obsidian-md), [obsidian-vault](https://github.com/topics/obsidian-vault), [obsidian-plugins](https://github.com/topics/obsidian-plugins), [obsidianmd](https://github.com/topics/obsidianmd), [obsidian-notes](https://github.com/topics/obsidian-notes), [obsidian-script](https://github.com/topics/obsidian-script), [obsidian-plugin-development](https://github.com/topics/obsidian-plugin-development)</sup>
 
 <!-- Link aliases -->
 
