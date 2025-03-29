@@ -7,12 +7,12 @@ popd > /dev/null
 install_obsidian_plugin() {
     local vault="$1"
 
+    if [[ -z $vault ]]; then
+        echo "Error: No Obsidian vault argument provided! Cannot install Obsidian plugin!"; exit 1
+    fi
+
     for plugin_source in "${@:2}"
     do
-      if [[ -z $vault ]]; then
-          echo "Error: No Obsidian vault argument provided! Cannot install Obsidian plugin!"; exit 1
-      fi
-
       if [[ -z $plugin_source ]]; then
           echo "Error: No Obsidian plugin source code provided! Cannot install Obsidian plugin into vault at path $vault!"; exit 2
       fi
