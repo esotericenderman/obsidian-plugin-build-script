@@ -26,12 +26,12 @@ install_obsidian_plugin() {
       fi
 
       local plugin_json
-      plugin_json=$(cat ./$plugin_source/manifest.json) || {
+      plugin_json=$(cat "./$plugin_source/manifest.json") || {
           echo "Error: failed to read Obsidian plugin manifest.json file at path $plugin_source! Cannot install into vault $vault!"; exit 5
       }
 
       local plugin_id
-      plugin_id=$(echo $plugin_json | jq -r .id) || {
+      plugin_id=$(echo "$plugin_json" | jq -r .id) || {
           echo "Error: failed to read Obsidian plugin ID from manifest.json file while install plugin at path $plugin_source into Obsidian vault at path $vault!"; exit 6
       }
 
