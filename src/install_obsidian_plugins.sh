@@ -40,6 +40,9 @@ install_obsidian_plugins() {
     echo "Current working directory: $(pwd)"
 
     for plugin in ./$vault/.obsidian/plugins/*/; do
+        echo "Running install script for Obsidian vault at path $vault..."
+        echo "Running install script for Obsidian plugin $plugin..."
+
         install_obsidian_plugin "$vault" "$plugin/$plugin_source"
     done
 
