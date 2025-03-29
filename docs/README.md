@@ -4,6 +4,9 @@
 
 A script to build the plugins inside a given Obsidian vault from their source code and move the built artifacts to their corresponding folders.
 
+> [!WARNING]
+> This plugin will clean [git submodules][git-submodules] (if there are any), which may be considered destructive! Make sure to commit your changes before running.
+
 ## Information
 
 - [Credit][credit]
@@ -66,6 +69,8 @@ Run the script with the following command:
 [excalidraw]: https://github.com/zsviczian/obsidian-excalidraw-plugin
 
 [example]: https://gitlab.com/esotericthought/primitive-notions
+
+[git-submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
 <!-- Dependencies -->
 
