@@ -52,7 +52,11 @@ install_obsidian_plugin() {
               echo "Error: failed to move Excalidraw manifest file!"; exit 7
             }
 
-            [[ -f "$plugin_source/dist/styles.css" ]] && mv "$plugin_source/dist/styles.css" $plugin_directory
+            [[ -f "$plugin_source/dist/styles.css" ]] && {
+              mv "$plugin_source/dist/styles.css" $plugin_directory || {
+                echo "Error: failed to move Excalidraw styles file!"; exit 7
+              }
+            }
             ;;
         "obsidian-dev-utils")
             mv "$plugin_source/dist/build/main.js" $plugin_directory || {
@@ -61,6 +65,12 @@ install_obsidian_plugin() {
 
             mv "$plugin_source/dist/build/manifest.json" $plugin_directory || {
               echo "Error: failed to move manifest file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
+            }
+
+            [[ -f "$plugin_source/dist/build/styles.css" ]] && {
+              mv $plugin_source/dist/build/styles.css $plugin_directory || {
+                echo "Error: failed to move styles file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
+              }
             }
             ;;
         *)
@@ -72,7 +82,11 @@ install_obsidian_plugin() {
               echo "Error: failed to move manifest file of plugin $plugin!"; exit 8
             }
 
-            [[ -f "$plugin_source/styles.css" ]] && cp "$plugin_source/styles.css" $plugin_directory
+            [[ -f "$plugin_source/styles.css" ]] && {
+              cp "$plugin_source/styles.css" $plugin_directory || {
+                echo "Error: failed to move styles file of plugin $plugin!"; exit 8
+              }
+            }
             ;;
     esac
 }
