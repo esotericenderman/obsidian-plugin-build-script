@@ -25,11 +25,13 @@ build_obsidian_plugin() {
           echo "Obsidian plugin manifest.json file not found at path $plugin_source!"; exit 4
       fi
 
-      local plugin_json=$(cat ./manifest.json) || {
+      local plugin_json
+      plugin_json=$(cat ./manifest.json) || {
           echo "Error: failed to read Obsidian plugin manifest.json file at path $plugin_source!"; exit 5
       }
 
-      local plugin_id=$(echo $plugin_json | jq -r .id) || {
+      local plugin_id
+      plugin_id=$(echo "$plugin_json" | jq -r .id) || {
           echo "Error: failed to read Obsidian plugin ID from manifest.json file when building plugin at path $plugin_source!"; exit 6
       }
 
@@ -71,7 +73,7 @@ build_obsidian_plugin() {
                 echo "Error: failed to install Obsidian plugin $plugin_id sub-project!"; exit 8
               }
 
-              popd > /dev/null
+              popd > /dev/null || exit
 
               npm run build || {
                 echo "Error: failed to build Obsidian plugin $plugin_id!"; exit 8
@@ -100,10 +102,10 @@ build_obsidian_plugin() {
               ;;
       esac
 
-      popd > /dev/null
+      popd > /dev/null || exit
     done
 }
 
-if [ $1 != --source-only ]; then
-    build_obsidian_plugin $@
+if [ "$1" != --source-only ]; then
+    build_obsidian_plugin "$@"
 fi
