@@ -7,11 +7,11 @@
 # vault: the path to the root of the vault (the folder that contains the .obsidian folder).
 # source: the path from a plugin folder (.obsidian/plugins/plugin) to its source code.
 
-pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
+pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null || exit
 
 . ./install_obsidian_plugin.sh --source-only
 
-popd > /dev/null
+popd > /dev/null || exit
 
 install_obsidian_plugins() {
     local vault="$1"

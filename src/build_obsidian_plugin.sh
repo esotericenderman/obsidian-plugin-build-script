@@ -1,8 +1,8 @@
-pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
+pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null || exit
 
 . ./obsidian_plugin_build_strategies.sh
 
-popd > /dev/null
+popd > /dev/null || exit
 
 build_obsidian_plugin() {
     for plugin_source in "$@"

@@ -1,8 +1,8 @@
-pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
+pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null || exit
 
 . ./build_obsidian_plugin.sh --source-only
 
-popd > /dev/null
+popd > /dev/null || exit
 
 install_obsidian_plugin() {
     local vault="$1"
