@@ -72,7 +72,7 @@ install_obsidian_plugin() {
               echo "Error: failed to move manifest file of plugin $plugin!"; exit 8
             }
 
-            [[ -f "$plugin_source/styles.css" ]] && cp "$plugin/$plugin_source/styles.css" $plugin_directory
+            [[ -f "$plugin_source/styles.css" ]] && cp "$plugin_source/styles.css" $plugin_directory
             ;;
     esac
 }
