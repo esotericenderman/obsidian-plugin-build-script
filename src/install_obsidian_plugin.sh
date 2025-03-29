@@ -63,31 +63,31 @@ install_obsidian_plugin() {
               ;;
           "obsidian-dev-utils")
               mv "$plugin_source/dist/build/main.js" "$plugin_directory" || {
-                echo "Error: failed to move main file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
+                echo "Error: failed to move main file of plugin $plugin_id built with Obsidian Dev Utils!"; exit 8
               }
 
               mv "$plugin_source/dist/build/manifest.json" "$plugin_directory" || {
-                echo "Error: failed to move manifest file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
+                echo "Error: failed to move manifest file of plugin $plugin_id built with Obsidian Dev Utils!"; exit 8
               }
 
               [[ -f "$plugin_source/dist/build/styles.css" ]] && {
                 mv "$plugin_source/dist/build/styles.css" "$plugin_directory" || {
-                  echo "Error: failed to move styles file of plugin $plugin built with Obsidian Dev Utils!"; exit 8
+                  echo "Error: failed to move styles file of plugin $plugin_id built with Obsidian Dev Utils!"; exit 8
                 }
               }
               ;;
           *)
               mv "$plugin_source/main.js" "$plugin_directory" || {
-                echo "Error: failed to move main file of plugin $plugin!"; exit 8
+                echo "Error: failed to move main file of plugin $plugin_id!"; exit 8
               }
 
               cp "$plugin_source/manifest.json" "$plugin_directory" || {
-                echo "Error: failed to move manifest file of plugin $plugin!"; exit 8
+                echo "Error: failed to move manifest file of plugin $plugin_id!"; exit 8
               }
 
               [[ -f "$plugin_source/styles.css" ]] && {
                 cp "$plugin_source/styles.css" "$plugin_directory" || {
-                  echo "Error: failed to move styles file of plugin $plugin!"; exit 8
+                  echo "Error: failed to move styles file of plugin $plugin_id!"; exit 8
                 }
               }
               ;;
