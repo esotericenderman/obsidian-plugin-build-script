@@ -43,7 +43,11 @@ install_obsidian_plugins() {
         echo "Running install script for Obsidian vault at path $vault..."
         echo "Running install script for Obsidian plugin $plugin..."
 
-        install_obsidian_plugin "$vault" "$plugin/$plugin_source"
+        source_directory="$plugin/$plugin_source"
+
+        echo "Obsidian plugin source is located at path $source_directory"
+
+        install_obsidian_plugin "$vault" "$source_directory"
     done
 
     echo "Checking for Git repository and submodules"
