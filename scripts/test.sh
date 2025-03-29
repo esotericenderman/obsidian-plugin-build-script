@@ -3,16 +3,10 @@
 
 set -e
 
-cd "$(dirname "${BASH_SOURCE[0]}")"/..
+pushd "$(dirname "${BASH_SOURCE[0]}")"/.. > /dev/null
 
-original_directory=$(pwd)
-test_directory=test
+. ./src/install_obsidian_plugins.sh --source-only
 
-. ./build_obsidian_plugins.sh --source-only
+install_obsidian_plugins test source
 
-for d in ./test/.obsidian/plugins/*/ ; do
-    build_obsidian_plugin $d source
-    install_obsidian_plugin $d source
-done
-
-cd -
+popd > /dev/null
