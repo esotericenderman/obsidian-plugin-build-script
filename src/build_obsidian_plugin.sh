@@ -29,14 +29,16 @@ build_obsidian_plugin() {
         echo "Error: failed to read Obsidian plugin manifest.json file at path $plugin_source!"; exit 5
     }
 
-    local plugin_id=$(echo $plugin_json | jq -r .id)
+    local plugin_id=$(echo $plugin_json | jq -r .id) || {
+        echo "Error: failed to read Obsidian plugin ID from manifest.json file when building plugin at path $plugin_source!"; exit 6
+    }
 
     echo "Building Obsidian plugin with ID $plugin_id..."
 
     echo "Installing dependencies"
 
     npm install || {
-      echo "Error: failed to install dependencies of Obsidian plugin $plugin_id!"; exit 6
+      echo "Error: failed to install dependencies of Obsidian plugin $plugin_id!"; exit 7
     }
 
     local build_strategy=${obsidian_plugin_build_strategies[$plugin_id]}
@@ -52,42 +54,42 @@ build_obsidian_plugin() {
             echo "Using Excalidraw Obsidian plugin build strategy"
 
             pushd "./MathjaxToSVG" > /dev/null || {
-              echo "Error: failed to access Obsidian $plugin_id sub-directory!"; exit 7
+              echo "Error: failed to access Obsidian $plugin_id sub-directory!"; exit 8
             }
 
             npm install || {
-              echo "Error: failed to install Obsidian plugin $plugin_id sub-directory dependencies!"; exit 6
+              echo "Error: failed to install Obsidian plugin $plugin_id sub-directory dependencies!"; exit 7
             }
 
             npm run build || {
-              echo "Error: failed to install Obsidian plugin $plugin_id sub-project!"; exit 7
+              echo "Error: failed to install Obsidian plugin $plugin_id sub-project!"; exit 8
             }
 
             popd > /dev/null
 
             npm run build || {
-              echo "Error: failed to build Obsidian plugin $plugin_id!"; exit 7
+              echo "Error: failed to build Obsidian plugin $plugin_id!"; exit 8
             }
             ;;
         "obsidian-dev-utils")
             echo "Using Obsidian Dev Utils build strategy"
 
             npx obsidian-dev-utils build || {
-              echo "Error: failed to build Obsidian plugin $plugin_id using Obsidian Dev Utils!"; exit 7
+              echo "Error: failed to build Obsidian plugin $plugin_id using Obsidian Dev Utils!"; exit 8
             }
             ;;
         "yarn")
             echo "Using Yarn Obsidian plugin build strategy"
 
             npx yarn run build || {
-              echo "Error: failed to build Obsidian plugin $plugin_id using Yarn!"; exit 7
+              echo "Error: failed to build Obsidian plugin $plugin_id using Yarn!"; exit 8
             }
             ;;
         *)
             echo "Using default Obsidian plugin build strategy"
 
             node esbuild.config.mjs production || {
-              echo "Error: failed to build Obsidian plugin $plugin_id using esbuild!"; exit 7
+              echo "Error: failed to build Obsidian plugin $plugin_id using esbuild!"; exit 8
             }
             ;;
     esac
