@@ -1,4 +1,4 @@
-pushd "$(dirname "$0")" > /dev/null
+pushd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null
 
 . ./obsidian_plugin_build_strategies.sh
 

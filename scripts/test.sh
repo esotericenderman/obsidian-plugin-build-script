@@ -3,7 +3,7 @@
 
 set -e
 
-cd "$(dirname "$0")"/..
+cd "$(dirname "${BASH_SOURCE[0]}")"/..
 
 original_directory=$(pwd)
 test_directory=test
