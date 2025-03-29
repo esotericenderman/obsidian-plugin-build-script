@@ -33,6 +33,10 @@ build_obsidian_plugin() {
         echo "Error: failed to read Obsidian plugin ID from manifest.json file when building plugin at path $plugin_source!"; exit 6
     }
 
+    if [[ -z $plugin_id ]]; then
+        echo "Error: failed to read Obsidian plugin ID from manifest.json file while install plugin at path $plugin_source into Obsidian vault at path $vault!"; exit 6
+    fi
+
     echo "Building Obsidian plugin with ID $plugin_id..."
 
     echo "Installing dependencies"
