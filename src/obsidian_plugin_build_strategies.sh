@@ -5,3 +5,5 @@ declare -rA obsidian_plugin_build_strategies=(
     ["better-markdown-links"]="obsidian-dev-utils"
     ["obsidian-excalidraw-plugin"]="excalidraw"
 )
+
+export obsidian_plugin_build_strategies
