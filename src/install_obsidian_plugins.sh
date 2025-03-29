@@ -15,7 +15,7 @@ popd > /dev/null || exit
 
 install_obsidian_plugins() {
     local vault="$1"
-    local plugin_source="$2"
+    local plugin_source_directory="$2"
 
     if [ ! -d "$vault" ] ; then
         echo "Error: Obsidian vault directory $vault not found!"; exit 1
@@ -35,16 +35,16 @@ install_obsidian_plugins() {
 
     echo "Building plugins"
     echo "Vault: $vault"
-    echo "Plugin source: $plugin_source"
+    echo "Plugin source: $plugin_source_directory"
 
     echo "Current working directory: $(pwd)"
 
     for plugin in "./$vault/.obsidian/plugins"/*; do
         echo "Running install script for Obsidian vault at path $vault..."
         echo "Running install script for Obsidian plugin $plugin..."
-        echo "Relative source directory: $plugin_source"
+        echo "Relative source directory: $plugin_source_directory"
 
-        source_directory="$plugin/$plugin_source"
+        source_directory="$plugin/$plugin_source_directory"
 
         echo "Obsidian plugin source is located at path $source_directory"
 
