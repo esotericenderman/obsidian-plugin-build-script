@@ -10,6 +10,6 @@
 [submodule "test/.obsidian/plugins/better-markdown-links/source"]
 	path = test/.obsidian/plugins/better-markdown-links/source
 	url = git@github.com:mnaoumov/obsidian-better-markdown-links.git
-[submodule "test/.obsidian/plugins/obsidian-sample-plugin/source"]
+[submodule "test/.obsidian/plugins/sample-plugin/source"]
 	path = test/.obsidian/plugins/sample-plugin/source
 	url = git@github.com:obsidianmd/obsidian-sample-plugin.git
