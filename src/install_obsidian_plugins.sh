@@ -7,11 +7,11 @@
 # vault: the path to the root of the vault (the folder that contains the .obsidian folder).
 # source: the path from a plugin folder (.obsidian/plugins/plugin) to its source code.
 
-pushd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null || exit
+pushd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null || exit 1
 
 . ./install_obsidian_plugin.sh --source-only
 
-popd >/dev/null || exit
+popd >/dev/null || exit 1
 
 install_obsidian_plugins() {
     local vault="$1"
@@ -19,12 +19,12 @@ install_obsidian_plugins() {
 
     if [ ! -d "$vault" ]; then
         echo "Error: Obsidian vault directory $vault not found!"
-        exit 1
+        exit 3
     fi
 
     if [ ! -d "$vault/.obsidian" ]; then
         echo "Error: provided directory is not an Obsidian vault as it does not contain a .obsidian folder!"
-        exit 2
+        exit 3
     fi
 
     if ! test -d "$vault/.obsidian/plugins"; then
@@ -62,7 +62,7 @@ install_obsidian_plugins() {
 
             git submodule foreach --recursive "git restore ./ && git clean -f" || {
                 echo "Failed to restore submodules to their original state!"
-                exit 9
+                exit 8
             }
         fi
     fi

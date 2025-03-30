@@ -41,6 +41,17 @@ Run the script with the following command:
 - `vault`: The path to the root of your vault. This is the folder containing the `.obsidian` folder.
 - `source`: The path from a plugin directory (`.obsidian/plugins/plugin`) to its source code.
 
+## Error Codes
+
+- `1`: Failed to move to or from a directory.
+- `2`: No argument provided.
+- `3`: Directory or file does not exist.
+- `4`: Failed to read file.
+- `5`: Failed to install dependencies.
+- `6`: Failed to build.
+- `7`: Failed to install plugin.
+- `8`: Failed to clean up.
+
 ## License
 
 &copy; 2025 [Esoteric Enderman][author-website]

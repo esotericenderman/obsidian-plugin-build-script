@@ -1,48 +1,48 @@
-pushd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null || exit
+pushd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null || exit 1
 
 . ./obsidian_plugin_build_strategies.sh
 
-popd >/dev/null || exit
+popd >/dev/null || exit 1
 
 build_obsidian_plugin() {
   for plugin_source in "$@"; do
     if [[ -z "$plugin_source" ]]; then
       echo "Error: no Obsidian plugin source code provided! Can't build Obsidian plugin."
-      exit 1
+      exit 2
     fi
 
     echo "Building Obsidian plugin at path: $plugin_source"
 
     if [ ! -d "$plugin_source" ]; then
       echo "Error: Obsidian plugin source code at path $plugin_source not found!"
-      exit 2
+      exit 3
     fi
 
     pushd "$plugin_source" >/dev/null || {
       echo "Error: failed to enter Obsidian plugin source code folder at path $plugin_source!"
-      exit 3
+      exit 1
     }
 
     if [ ! -f ./manifest.json ]; then
       echo "Obsidian plugin manifest.json file not found at path $plugin_source!"
-      exit 4
+      exit 3
     fi
 
     local plugin_json
     plugin_json=$(cat ./manifest.json) || {
       echo "Error: failed to read Obsidian plugin manifest.json file at path $plugin_source!"
-      exit 5
+      exit 4
     }
 
     local plugin_id
     plugin_id=$(echo "$plugin_json" | jq -r .id) || {
       echo "Error: failed to read Obsidian plugin ID from manifest.json file when building plugin at path $plugin_source!"
-      exit 6
+      exit 4
     }
 
     if [[ -z $plugin_id ]]; then
       echo "Error: failed to read Obsidian plugin ID from manifest.json file while building Obsidian plugin at path $plugin_source!"
-      exit 6
+      exit 4
     fi
 
     echo "Building Obsidian plugin with ID $plugin_id..."
@@ -53,7 +53,7 @@ build_obsidian_plugin() {
 
     npm install || {
       echo "Error: failed to install dependencies of Obsidian plugin $plugin_id!"
-      exit 7
+      exit 5
     }
 
     local build_strategy=${obsidian_plugin_build_strategies[$plugin_id]}
@@ -70,24 +70,24 @@ build_obsidian_plugin() {
 
       pushd "./MathjaxToSVG" >/dev/null || {
         echo "Error: failed to access Obsidian $plugin_id sub-directory!"
-        exit 8
+        exit 1
       }
 
       npm install || {
         echo "Error: failed to install Obsidian plugin $plugin_id sub-directory dependencies!"
-        exit 7
+        exit 5
       }
 
       npm run build || {
         echo "Error: failed to install Obsidian plugin $plugin_id sub-project!"
-        exit 8
+        exit 6
       }
 
       popd >/dev/null || exit
 
       npm run build || {
         echo "Error: failed to build Obsidian plugin $plugin_id!"
-        exit 8
+        exit 6
       }
       ;;
     "obsidian-dev-utils")
@@ -95,7 +95,7 @@ build_obsidian_plugin() {
 
       npx obsidian-dev-utils build || {
         echo "Error: failed to build Obsidian plugin $plugin_id using Obsidian Dev Utils!"
-        exit 8
+        exit 6
       }
       ;;
     "yarn")
@@ -103,7 +103,7 @@ build_obsidian_plugin() {
 
       npx yarn run build || {
         echo "Error: failed to build Obsidian plugin $plugin_id using Yarn!"
-        exit 8
+        exit 6
       }
       ;;
     *)
@@ -111,12 +111,12 @@ build_obsidian_plugin() {
 
       node esbuild.config.mjs production || {
         echo "Error: failed to build Obsidian plugin $plugin_id using esbuild!"
-        exit 8
+        exit 6
       }
       ;;
     esac
 
-    popd >/dev/null || exit
+    popd >/dev/null || exit 1
   done
 }
 
