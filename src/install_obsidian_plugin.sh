@@ -51,6 +51,11 @@ install_obsidian_plugin() {
 
     local plugin_directory="$vault/.obsidian/plugins/$plugin_id"
 
+    mkdir -p plugin_directory || {
+      echo "Error: failed to create Obsidian plugin directory $plugin_directory while installing Obsidian plugin $plugin_id into vault $vault!"
+      exit 9
+    }
+
     case "${obsidian_plugin_build_strategies[$plugin_id]}" in
     "excalidraw")
       mv "$plugin_source/dist/main.js" "$plugin_directory" || {

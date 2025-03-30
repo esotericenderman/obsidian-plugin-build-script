@@ -51,6 +51,7 @@ Run the script with the following command:
 - `6`: Failed to build.
 - `7`: Failed to install plugin.
 - `8`: Failed to clean up.
+- `9`: Failed to create a directory or file.
 
 ## License
 
