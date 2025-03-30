@@ -1,3 +1,5 @@
+#!/bin/bash
+
 pushd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null || exit 1
 
 . ./obsidian_plugin_build_strategies.sh
