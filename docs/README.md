@@ -14,6 +14,7 @@ A script to build the plugins inside a given Obsidian vault from their source co
 ## Requirements
 
 - [jq][jq]
+- Whatever is required to build the plugin(s) you want to include, which almost definitely means [npm][npm].
 
 ## Supported Plugin Types
 
@@ -87,6 +88,7 @@ Run the script with the following command:
 <!-- Dependencies -->
 
 [jq]: https://jqlang.org/
+[npm]: https://nodejs.org/en/download
 
 <!-- Files -->
 
